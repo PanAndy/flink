@@ -636,6 +636,7 @@ public class StreamGraph implements Pipeline {
                 partitioner = virtualPartitionNodes.get(virtualId).f1;
             }
             exchangeMode = virtualPartitionNodes.get(virtualId).f2;
+            // 递归寻找上一个实际节点
             addEdgeInternal(
                     upStreamVertexID,
                     downStreamVertexID,

@@ -1194,7 +1194,7 @@ public class DataStream<T> {
 
         OneInputTransformation<T, R> resultTransform =
                 new OneInputTransformation<>(
-                        this.transformation,
+                        this.transformation,    // this.transformation构成了调用.flatMap的节点，就构成了transformation树
                         operatorName,
                         operatorFactory,
                         outTypeInfo,
