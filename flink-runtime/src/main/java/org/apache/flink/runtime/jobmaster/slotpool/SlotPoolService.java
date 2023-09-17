@@ -35,7 +35,9 @@ import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Optional;
 
-/** Service used by the {@link JobMaster} to manage a slot pool. */
+/** Service used by the {@link JobMaster} to manage a slot pool.
+ * 主要负责管理分配给JobManager的Slot资源以及与ResourceManager进行交互申请的Slot资源
+ * */
 public interface SlotPoolService extends AutoCloseable {
 
     /**
