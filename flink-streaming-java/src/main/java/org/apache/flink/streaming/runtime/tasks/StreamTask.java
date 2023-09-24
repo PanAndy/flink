@@ -274,6 +274,8 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 
     protected final MailboxProcessor mailboxProcessor;
 
+    // mainMailboxExecutor.execute() 调用是将ThrowingRunnable的command作为mail加入TaskMailBox
+    // 待MailboxProcessor消费时调用
     final MailboxExecutor mainMailboxExecutor;
 
     /** TODO it might be replaced by the global IO executor on TaskManager level future. */
@@ -563,6 +565,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
             // data availability has changed in the meantime; retry immediately
             return;
         }
+        // 上游没有数据了，这里是会暂停等待的，直到有数据过来了才处理
         assertNoException(
                 resumeFuture.thenRun(
                         new ResumeWrapper(controller.suspendDefaultAction(timer), timer)));
